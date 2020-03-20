@@ -9,7 +9,16 @@ let normalRead = function (res) {
 };
 
 let streamRead = function (fileName, res) {
+    var length = 0;
+
     var stream = fs.createReadStream(fileName);
+    stream.on('data', function (chunk) {
+        length += chunk.toString().length
+    });
+    stream.on('end', function () {
+        console.log(length)
+    });
+
     stream.pipe(res);
 };
 
