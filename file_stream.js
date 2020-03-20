@@ -11,17 +11,25 @@ let copyNormally = () => fs.readFile(readFile, (err, data) => {
         console.log(err.message);
         return
     }
-    console.log(data.toString());
 
     var readData = data.toString();
 
     fs.writeFile(writeFile, readData, (err) => {
         if (err) {
             console.log(err.message);
-
         }
-        console.log('写入完成');
+        console.log('Normally 写入完成');
     });
 });
 
+let copyWithStream = () => {
+    var readStream = fs.createReadStream(readFile);
+    var writeStream = fs.createWriteStream(writeFile);
+
+    readStream.pipe(writeStream);
+
+    readStream.on('end', () => console.log('Stream 拷贝完成'))
+};
 copyNormally();
+
+copyWithStream();
