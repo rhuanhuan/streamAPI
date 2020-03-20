@@ -1,6 +1,8 @@
 var http = require('http');
 var fs = require('fs');
 var path = require('path');
+var memeye = require('memeye');
+memeye();
 
 var readFile = path.resolve(__dirname, 'data.txt');
 var writeFile = path.resolve(__dirname, 'data-write.txt');
@@ -30,6 +32,14 @@ let copyWithStream = () => {
 
     readStream.on('end', () => console.log('Stream 拷贝完成'))
 };
-copyNormally();
 
-copyWithStream();
+setTimeout(() => {
+    for (i=0; i<100; i++){
+        console.log(i);
+        copyWithStream()
+    }
+}, 5000);
+
+// copyNormally();
+
+// copyWithStream();
