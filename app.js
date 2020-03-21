@@ -20,7 +20,8 @@ let streamRead = function (req, res) {
                 length += chunk.toString().length;
                 // check chunk style and print
                 console.log(chunk instanceof Buffer);
-                console.log(chunk)
+                console.log(chunk);
+                console.log(length)
             });
             stream.on('end', () => {
                 console.log('chunk end');
